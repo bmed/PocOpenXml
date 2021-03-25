@@ -6,9 +6,9 @@
         static void Main(string[] args)
         {
             ExcelGenerator.CreateExcelFile("/tmp");
+
         }
 
 
     }
 }
-
