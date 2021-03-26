@@ -66,9 +66,13 @@ namespace testdocker
         }
         private static void GenerateWorkbookStylesPartContent(WorkbookStylesPart workbookStylesPart)
         {
-            var styleSheet = new Stylesheet() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x14ac" } };
-            styleSheet.AddNamespaceDeclaration("mc", "http: //schemas.openxmlformats.org/markup-compatibility/2016");
-            styleSheet.AddNamespaceDeclaration("x14ac", "http: //schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
+
+            Stylesheet styleSheet = new Stylesheet() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x14ac x16r2 xr" } };
+            //this namespace are revelead using the took OPEN XML PRODUCTIVITY TOOL -- REFLECT CODE feature
+            styleSheet.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            styleSheet.AddNamespaceDeclaration("x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
+            styleSheet.AddNamespaceDeclaration("x16r2", "http://schemas.microsoft.com/office/spreadsheetml/2015/02/main");
+            styleSheet.AddNamespaceDeclaration("xr", "http://schemas.microsoft.com/office/spreadsheetml/2014/revision");
 
             #region fonts
 
@@ -83,9 +87,8 @@ namespace testdocker
             Color color2 = new Color() { Rgb = HexBinaryValue.FromString("FF808080") };
             Bold bold2 = new Bold();
             Italic it2 = new Italic();
-            FontName fontName2 = new FontName() { Val = "Arial" };
-            FontFamilyNumbering fontFamilyNumbering2 = new FontFamilyNumbering() { Val = 1 };
-            FontScheme fontScheme2 = new FontScheme() { Val = FontSchemeValues.Minor };
+            FontName fontName2 = new FontName() { Val = "Arial Black" };
+            FontFamilyNumbering fontFamilyNumbering2 = new FontFamilyNumbering() { Val = 2 };
 
             f2.Append(fontSize2);
             f2.Append(color2);
@@ -93,22 +96,20 @@ namespace testdocker
             f2.Append(bold2);
             f2.Append(it2);
             f2.Append(fontFamilyNumbering2);
-            f2.Append(fontScheme2);
 
             Font f3 = new Font();
             FontSize fontSize3 = new FontSize() { Val = 16D };
             Color color3 = new Color() { Rgb = HexBinaryValue.FromString("FF0000FF") };
             Underline ud3 = new Underline();
-            FontName fontName3 = new FontName() { Val = "Arial" };
+            FontName fontName3 = new FontName() { Val = "Times New Roman" };
             FontFamilyNumbering fontFamilyNumbering3 = new FontFamilyNumbering() { Val = 1 };
-            FontScheme fontScheme3 = new FontScheme() { Val = FontSchemeValues.Minor };
+
 
             f3.Append(fontSize3);
             f3.Append(color3);
             f3.Append(ud3);
             f3.Append(fontName3);
             f3.Append(fontFamilyNumbering3);
-            f3.Append(fontScheme3);
 
             fontList.Append(f1);
             fontList.Append(f2);
@@ -119,9 +120,9 @@ namespace testdocker
 
             Fills fillList = new Fills();
 
-            // create a solid red fill
+            //solid red fill
             var solidRed = new PatternFill() { PatternType = PatternValues.Solid };
-            solidRed.ForegroundColor = new ForegroundColor { Rgb = HexBinaryValue.FromString("FFFF0000") }; // red fill
+            solidRed.ForegroundColor = new ForegroundColor { Rgb = HexBinaryValue.FromString("FFFF0000") };
             solidRed.BackgroundColor = new BackgroundColor { Indexed = 64 };
 
             fillList.AppendChild(new Fill { PatternFill = new PatternFill { PatternType = PatternValues.None } }); // required, reserved by Excel
